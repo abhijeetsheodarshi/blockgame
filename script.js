@@ -28,7 +28,7 @@ function init() {
 
     // 2. Camera setup - Orthographic for isometric look
     const aspect = window.innerWidth / window.innerHeight;
-    const d = 10;
+    const d = aspect < 1 ? 16 : 10; // Zoom out on mobile
     camera = new THREE.OrthographicCamera(-d * aspect, d * aspect, d, -d, 1, 100);
     camera.position.set(10, 10, 10);
     camera.lookAt(0, 0, 0);
@@ -51,7 +51,15 @@ function init() {
     window.addEventListener("resize", onWindowResize);
     window.addEventListener("mousedown", onAction);
     window.addEventListener("touchstart", onAction, { passive: false });
-    tryAgainBtn.addEventListener("click", resetGame);
+    tryAgainBtn.addEventListener("click", function(e) {
+        e.stopPropagation();
+        resetGame();
+    });
+    tryAgainBtn.addEventListener("touchstart", function(e) {
+        e.stopPropagation();
+        e.preventDefault(); // Prevents simulated click on mobile
+        resetGame();
+    }, { passive: false });
     
     // Start with foundation
     resetGame();
@@ -251,7 +259,7 @@ function showGameOver() {
 
 function onWindowResize() {
     const aspect = window.innerWidth / window.innerHeight;
-    const d = 10;
+    const d = aspect < 1 ? 16 : 10; // Zoom out on mobile
     camera.left = -d * aspect;
     camera.right = d * aspect;
     camera.top = d;
