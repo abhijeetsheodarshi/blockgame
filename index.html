@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>3D Stacking Game</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="ui">
+        <div id="score">0</div>
+    </div>
+    
+    <div id="game-over" class="hidden">
+        <h1>Game Over</h1>
+        <p>Score: <span id="final-score">0</span></p>
+        <button id="try-again">Try Again</button>
+    </div>
+
+    <!-- Load Three.js safely from a stable CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
